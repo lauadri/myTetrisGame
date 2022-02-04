@@ -1,0 +1,70 @@
+:root{
+    --box-size: 40px;
+    --grid-columns: 10;
+    --grid-rows: 18;
+}
+
+#grid{
+    width: calc( var(--box-size) * var(--grid-columns));
+    height: calc( var(--box-size) * var(--grid-rows));
+    display: flex;
+    flex-wrap: wrap;
+    border: 2px solid rgb(12, 12, 12);
+    background-color: rgb(211, 213, 219);
+    color: #0f0f0f;
+}
+#grid>div{ 
+    width: var(--box-size);
+    height: var(--box-size);
+    /*border: 1px solid brown;*/
+}
+
+body{
+    background-color: #171b1fd2;
+    color: #ffffff;
+    font-size: 7px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: stretch;
+    padding: 20px
+    
+}
+
+.game-info{
+    background-color: #0e1013d2;
+    padding: 10px;
+    width: 400px;
+    font-size: 25px;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.brick{
+    background-image: url('./immagini/brick_double2.png');
+    background-repeat: no-repeat;
+    background-size: contain;    
+    
+}
+
+.square{
+    background-color: #e0aeaefb ;   
+}
+.line{
+    background-color: blue ;   
+}
+.z_left{
+    background-color: yellow ;   
+}
+.z_right{
+    background-color: green ;   
+}
+.pyramid{
+    background-color:darkslategrey ;   
+}
+.l_left{
+    background-color: red ;   
+}
+.l_right{
+    background-color:darkorchid ;   
+}
