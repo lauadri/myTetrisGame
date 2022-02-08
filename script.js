@@ -202,125 +202,162 @@ function moveBrickbyKey(event){
     }else if(event.code == "ArrowUp"){  
         //rotate      
                     switch (blockname) {                        
-                        case 'line':                     
-                            if (cell[0] >20 && typeof cells[cell[0]] != "undefined" &&  cells[cell[0]].classList.contains('config1')){          
-                                deleteBrick();  
-                                cell[0] = cell[0] - ((columns*2) - 2);
-                                cell[1] = cell[1] - (columns - 1);                                
-                                cell[3] = cell[3] + (columns - 1);                                 
-                                configNr = 'config2';
+                        case 'line':    //ok per blocco ai lati                 
+                            if (cell[0] >20 && typeof cells[cell[0]] != "undefined" &&  cells[cell[0]].classList.contains('config1')){  
+
+                                if  (((cell[0]%10 != 0) && (cell[3]%10 == 9)) || ((cell[0]%10 == 0) && (cell[3]%10 != 9)) || (((cell[0]%10 != 0) && (cell[0]%10 != 9)))){        
+                                    deleteBrick();  
+                                    cell[0] = cell[0] - ((columns*2) - 2);
+                                    cell[1] = cell[1] - (columns - 1);                                
+                                    cell[3] = cell[3] + (columns - 1);  
+                                    configNr = 'config2';         
+                                }
                             }else if (typeof cells[cell[0]] != "undefined" &&  cells[cell[0]].classList.contains('config2')){           
-                                deleteBrick(); 
-                                cell[0] = cell[0] + ((columns*2) - 2);                                      
-                                cell[1] = cell[1] + (columns - 1);    
-                                cell[3] = cell[3] - (columns - 1); 
-                                configNr = 'config1';                    
+                                if  ( (cell[0]%10 != 0)  && (cell[0]%10 != 1)  && (cell[0]%10 != 9) ){      
+                                    deleteBrick();   
+                                    cell[0] = cell[0] + ((columns*2) - 2);                                      
+                                    cell[1] = cell[1] + (columns - 1);    
+                                    cell[3] = cell[3] - (columns - 1); 
+                                    configNr = 'config1';     
+                                }
+     
                             }                            
                             break;
-
-                        case 'square': 
-                        break;
-
-                        case 'z_left': 
-                            if (typeof cells[cell[0]] != "undefined" &&  cells[cell[0]].classList.contains('config1')){          
+                        case 'z_left': //ok per blocco ai lati      
+                            if (typeof cells[cell[0]] != "undefined" &&  cells[cell[0]].classList.contains('config1')){   
+                               // orizzontale
                                 deleteBrick();  
                                 cell[0] = cell[0] - (columns - 2);                      
                                 cell[6] = cell[6] - columns;                                   
                                 configNr = 'config2';
                             }else if (typeof cells[cell[0]] != "undefined" &&  cells[cell[0]].classList.contains('config2')){           
-                                deleteBrick(); 
+                                //verticale
+                               if  ( (cell[0]%10 != 1) ){   
+                                deleteBrick();  
                                 cell[0] = cell[0] + (columns - 2);                       
                                 cell[6] = cell[6] + columns;
-                                configNr = 'config1';                    
+                                configNr = 'config1';         
+                            }           
                             }                     
                         break;
 
-                        case 'z_right': 
-                            if (typeof cells[cell[2]] != "undefined" &&  cells[cell[2]].classList.contains('config1')){          
-                                deleteBrick();  
+                        case 'z_right':  //ok per blocco ai lati 
+                            if (typeof cells[cell[2]] != "undefined" &&  cells[cell[2]].classList.contains('config1')){
+                                console.log(cell[3]%10 )        
+                                
+                                    deleteBrick();   
                                 cell[2] = cell[2] - 1;                      
                                 cell[3] = cell[3] + ((columns*2)-1);                                   
                                 configNr = 'config2';
+                               
                             }else if (typeof cells[cell[2]] != "undefined" &&  cells[cell[2]].classList.contains('config2')){           
-                                deleteBrick(); 
+                                if  ( (cell[2]%10 != 8) ){                                  
+                                    deleteBrick();
                                 cell[2] = cell[2] + 1;                       
                                 cell[3] = cell[3] - ((columns*2)-1); 
-                                configNr = 'config1';                    
+                                configNr = 'config1';      
+                            }              
                             }                     
                         break;
 
-                        case 'pyramid':
+                        case 'pyramid'://ok per blocco ai lati 
                             if (typeof cells[cell[4]] != "undefined" &&  cells[cell[4]].classList.contains('config1')){          
-                                deleteBrick();          
+                                
+                                    deleteBrick();          
                                 cell[4] = cell[4] - ((columns*2)-1);      
                                 cell[6] = cell[6] - columns;                                  
                                 configNr = 'config2';
+                                
                             }else if (typeof cells[cell[4]] != "undefined" &&  cells[cell[4]].classList.contains('config2')){           
-                                deleteBrick();                      
+                                if  ( (cell[4]%10 != 0) ){                                  
+                                
+                                deleteBrick();                         
                                 cell[4] = cell[4] + (columns - 1);   
-                                configNr = 'config3';                    
+                                configNr = 'config3';      
+                            }              
                             }else if (typeof cells[cell[4]] != "undefined" &&  cells[cell[4]].classList.contains('config3')){           
-                                deleteBrick();                  
+                                
+                               
+                                    deleteBrick();                  
                                 cell[6] = cell[6] - (columns + 1); 
-                                configNr = 'config4';                    
+                                configNr = 'config4';           
+                                   
                             }else if (typeof cells[cell[4]] != "undefined" &&  cells[cell[4]].classList.contains('config4')){           
-                                deleteBrick();                      
+                                if  ( (cell[6]%10 != 9) ){                                  
+                                    deleteBrick();               
                                 cell[4] = cell[4] + columns;               
                                 cell[6] = cell[6] + ((columns*2)+1);  
-                                configNr = 'config1';                    
+                                configNr = 'config1';  
+                            }                        
                             }    
                             break;
                             case 'l_left':
                             if (typeof cells[cell[0]] != "undefined" &&  cells[cell[0]].classList.contains('config1')){          
-                                deleteBrick();                           
+                             
+                                    deleteBrick();                           
                                 cell[2] = cell[2]  + (columns - 1);   
                                 cell[4] = cell[4]  + (columns + 1);;          
                                                                 
                                 configNr = 'config2';
                             }else if (typeof cells[cell[0]] != "undefined" &&  cells[cell[0]].classList.contains('config2')){           
-                                deleteBrick();                         
+                                                              
+                              
+                                    deleteBrick();               
                                 cell[2] = cell[2]  - (columns - 1);   
                                 cell[4] = cell[4]  - ((columns*3) -1);       
-                                configNr = 'config3';                    
+                                configNr = 'config3';              
+                            
                             }else if (typeof cells[cell[0]] != "undefined" &&  cells[cell[0]].classList.contains('config3')){           
-                                deleteBrick();                                   
+                               
+                                    deleteBrick();                                    
                                 cell[0] = cell[0] + (columns + 1);                   
                                 cell[2] = cell[2] - (columns + 1);     
                                 cell[4] = cell[4] + (columns*2);      
                                 configNr = 'config4';                    
                             }else if (typeof cells[cell[0]] != "undefined" &&  cells[cell[0]].classList.contains('config4')){           
-                                deleteBrick();                  
+                                if  ( (cell[2]%10 != 0) ){    
+                                    deleteBrick();                         
                                 cell[0] = cell[0] - (columns + 1);        
                                 cell[2] = cell[2] + (columns + 1); ;   
                                 cell[4] = cell[4] - 2;    
-                                configNr = 'config1';                    
+                                configNr = 'config1'; 
+                                }                   
                             }    
                             break;
 
                             case 'l_right':
                             if (typeof cells[cell[1]] != "undefined" &&  cells[cell[1]].classList.contains('config1')){          
-                                deleteBrick();                          
+                               
+                                    deleteBrick();                             
                                 cell[1] = cell[1]  - (columns - 1); 
                                 cell[3] = cell[3]  + (columns - 1);          
                                 cell[7] = cell[7]  -2;                                                                
                                 configNr = 'config2';
                             }else if (typeof cells[cell[1]] != "undefined" &&  cells[cell[1]].classList.contains('config2')){           
-                                deleteBrick();               
+                                if  ( (cell[2]%10 != 9) ){    
+                                   
+                                 deleteBrick();                
                                 cell[1] = cell[1]  + ((columns*2) + 1);        
                                 cell[2] = cell[2]  -1;     
-                                configNr = 'config3';                    
+                                configNr = 'config3';     
+                                }               
                             }else if (typeof cells[cell[1]] != "undefined" &&  cells[cell[1]].classList.contains('config3')){           
-                                deleteBrick();                           
+                                                      
+                                   
+                                 deleteBrick();                            
                                 cell[1] = cell[1]  - ((columns*2)+ 1);    
                                 cell[3] = cell[3]  - ((columns*2) + 1);  
                                 configNr = 'config4';                    
                             }else if (typeof cells[cell[1]] != "undefined" &&  cells[cell[1]].classList.contains('config4')){           
-                                deleteBrick();                         
+                                 
+                                if  (cell[2]%10 != 9 && cell[1]%10 != 9 && cell[3]%10 != 9 && cell[7]%10 != 9){  
+                                deleteBrick(); 
                                 cell[1] = cell[1]  + (columns-1) ;       
                                 cell[2] = cell[2]  + 1 ;          
                                 cell[3] = cell[3]  + (columns + 2);          
                                 cell[7] = cell[7]  + 2;   
-                                configNr = 'config1';                    
+                                configNr = 'config1';      
+                                }              
                             }    
                             break;
 
